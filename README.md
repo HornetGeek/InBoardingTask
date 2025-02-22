@@ -66,6 +66,36 @@ This project is a comprehensive Booking Management System that integrates multip
    docker-compose up --build
    ```
 
+## Initial Configuration
+
+### Odoo Setup
+1. Access Odoo at `http://localhost:8069`
+2. Create a new database named `booking`
+3. Install Sales and Invoicing modules
+4. Create API access user matching docker-compose credentials
+
+### Directus Setup
+1. Access Directus at `http://localhost:8055`
+2. Create a `bookings` collection with the following fields:
+   - `customer_id` (Integer)
+   - `service_id` (Integer)
+   - `date` (Date)
+   - `time` (Time)
+   - `order_id` (Integer, Nullable)
+   - `invoice_id` (Integer, Nullable)
+   - `cal_booking_id` (String, Nullable)
+   - `status` (String: pending, confirmed, completed, cancelled)
+   - `additional_info` (Text, Nullable)
+
+### Verification
+```bash
+# Check Odoo database connection
+docker-compose exec odoo psql -U odoo -d booking
+
+# Check Directus bookings collection
+curl http://localhost:8055/bookings
+```
+
 ## API Endpoints
 
 ### Create a Booking
@@ -119,12 +149,8 @@ Key configuration is managed through environment variables in `docker-compose.ym
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
-
-Specify your project's license here (e.g., MIT, Apache 2.0)
-
 ## Contact
 
-Your Name - your.email@example.com
+moataz - mmoataz03@gmail.com
 
 Project Link: [https://github.com/yourusername/booking-management-system](https://github.com/yourusername/booking-management-system)
