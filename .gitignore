@@ -1,0 +1,119 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+env/
+.env/
+.venv/
+
+# Docker
+.docker
+
+# Environment Files (be careful with sensitive information)
+*.env
+!example.env
+
+# Directus
+directus/data/
+
+# Logs
+*.log
+logs/
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backup files
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Build and Distribution
+build/
+dist/
+*.egg-info/
+
+# Database files
+*.sqlite3
+*.db
+
+# Media and Static files (if not wanted in version control)
+media/
+static/
+
+# Secrets and Sensitive Information
+secrets/
+.secrets/
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Temporary files
+temp/
+tmp/
+
+# Database backup files
+*.sql
+*.sqlite
+
+# Frontend build directories (if applicable)
+app/build/
+app/dist/
+
+# Docker volumes and data
+docker/data/
+docker/volumes/
+
+# Pytest
+.pytest_cache/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Ansible
+*.retry
+
+# Local development files
+.local/
+
+# Performance profiling
+*.prof
+
+# Security scanning
+*.bfg-report/

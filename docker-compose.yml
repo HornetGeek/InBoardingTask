@@ -1,0 +1,54 @@
+version: '3'
+services:
+  odoo:
+    image: odoo:16.0
+    ports:
+      - "8069:8069"
+    environment:
+      - HOST=odoo_db
+      - USER=odoo
+      - PASSWORD=myodoo
+    depends_on:
+      - odoo_db
+  
+  odoo_db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=myodoo
+      - POSTGRES_USER=odoo
+
+  directus:
+    image: directus/directus:latest
+    ports:
+      - "8055:8055"
+    environment:
+      KEY: 'your-secret-key'
+      SECRET: 'your-secret'
+      ADMIN_EMAIL: 'admin@example.com'
+      ADMIN_PASSWORD: 'd1r3ctu5'
+      DB_CLIENT: 'sqlite3'
+      DB_FILENAME: '/directus/database/data.db'
+    volumes:
+      - ./directus/database:/directus/database
+      - ./directus/uploads:/directus/uploads
+
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - ODOO_URL=http://odoo:8069
+      - ODOO_DB=booking
+      - ODOO_USERNAME=mmoataz03@gmail.com
+      - ODOO_PASSWORD=25ne-wb3z-g4rv
+      - DIRECTUS_ADMIN_EMAIL=admin@example.com
+      - DIRECTUS_ADMIN_PASSWORD=d1r3ctu5 
+      - DIRECTUS_API_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUxNmNmN2U4LWIxM2YtNGE2Yi05ZDEwLWI4OWZiMzNkODhhOCIsInJvbGUiOiI3YmQwOTdmYy0wNjcwLTQ3OWItYTljYi1mY2I3MWY5ZTExM2IiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsInNlc3Npb24iOiJFT3NjYzUzY01lZ2lFZUlHa2pqU2s5ZmF3S0hVbGlubXNMV0pKYnVGOGV6VGRMenJ2M2ZGNms3alJyYU5lbjg3IiwiaWF0IjoxNzQwMTY2ODI1LCJleHAiOjE3NDAyNTMyMjUsImlzcyI6ImRpcmVjdHVzIn0.ekGaXdNtao44B9OUQQ0HQjm3yu_F8XZ9l9BF5wAezcs
+      - DIRECTUS_API_URL=http://directus:8055
+      - CALCOM_API_KEY=cal_live_6a1ea678e2d69014c13b2c4596b921ac
+      - CALCOM_API_URL=https://api.cal.com
+      - API_KEY=your_api_key
+    depends_on:
+      - odoo
+      - directus

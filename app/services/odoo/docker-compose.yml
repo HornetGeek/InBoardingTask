@@ -1,0 +1,19 @@
+version: '3'
+services:
+  odoo:
+    image: odoo:16.0
+    ports:
+      - "8069:8069"
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=myodoo
+    depends_on:
+      - db
+  
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=myodoo
+      - POSTGRES_USER=odoo
